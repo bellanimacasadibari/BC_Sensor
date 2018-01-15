@@ -24,10 +24,10 @@ session_start();
 $user_check = $_SESSION['cerca'];
 $ses_sql = mysql_query ("SELECT * FROM $tbl_name WHERE codsensore ='$user_check'" , $connection);
 $row = mysql_fetch_assoc($ses_sql);
-$cod = $row['codsensore'];
-$marca = $row['marca'];
-$tipo = $row['tipo'];
-$cliente =$row['clienteproprietario'];
+$cod =  htmlspecialchars($row['codsensore']);
+$marca =  htmlspecialchars($row['marca']);
+$tipo =  htmlspecialchars($row['tipo']);
+$cliente =  htmlspecialchars($row['clienteproprietario']);
 ?></tr></i></b>
 <form action="#" method="post"> 
 <form action="#" method="post"> 
