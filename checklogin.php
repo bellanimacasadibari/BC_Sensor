@@ -12,8 +12,8 @@ $myusername=$_POST['myusername'];
 $mypassword=$_POST['mypassword'];
 $mytipo=$_POST['mytipo'];
 $query1 = sprintf("SELECT * FROM $tbl_name WHERE  username='$myusername' and password='$mypassword' and tipo='$mytipo'" ,mysqli_real_escape_string($connection,$username),mysqli_real_escape_string($connection,$password), mysqli_real_escape_string($connection,$tipo));
-$ses_sql =  mysqli_query($connection, $query1);
-$result=mysql_query($sql);
+$result =  mysqli_query($connection, $query1);
+
 // Mysql_num_row is counting table row
 $count=mysql_num_rows($result);
 // If result matched $myusername and $mypassword, table row must be 1 row
