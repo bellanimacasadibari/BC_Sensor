@@ -5,11 +5,12 @@ $password=""; // Mysql password
 $db_name="my_setlist"; //Nome del Database
 $tbl_name="impianti"; // Nome della Tabella
 // Procedimento per connettersi al Database
-mysql_connect("$host", "$username", "$password")or die("cannot connect");
-mysql_select_db("$db_name")or die("cannot select DB"); 
+$connection = new mysqli($host, $username, getPassword(), $db);
+$db =mysqli_select_db("$db_name"); 
 // Nome utente e password inviate attraverso il form
 $myimpianto=$_POST['myimpianto'];
-$sql="SELECT * FROM $tbl_name WHERE numeroimpianto='$myimpianto'";
+$query1 = sprintf("SELECT * FROM $tbl_name WHERE numeroimpianto ='$myimpianto'" ,mysqli_real_escape_string($connection,$numeroimpianto);
+$sql=mysqli_query($connection, $query1);
 $result=mysql_query($sql);
 // Mysql_num_row is counting table row
 $count=mysql_num_rows($result);
@@ -29,4 +30,4 @@ if(isset($_POST['myimpianto'])){
 else {
 echo "Attenzione numero impianto errato";
 }}
-?> 
+?> 
