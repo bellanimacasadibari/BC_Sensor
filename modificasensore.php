@@ -18,36 +18,31 @@ $username="setlist"; // Mysql username
 $password=""; // Mysql password
 $db_name="my_setlist"; //Nome del Database
 $tbl_name="sensori"; // Nome della Tabella
-$connection = mysql_connect("$host", "$username", "$password")or die("cannot connect");
-$db =mysql_select_db("$db_name")or die("cannot select DB"); 
+$connection = new mysqli($host, $username, $password, $db);
+$db =mysql_select_db("$db_name"); 
 session_start();
 $user_check = $_SESSION['cerca'];
-$ses_sql = mysql_query ("SELECT * FROM $tbl_name WHERE codsensore ='$user_check'" , $connection);
-$row = mysql_fetch_assoc($ses_sql);
-
+    $query1 = sprintf("SELECT * FROM $tbl_name WHERE codsensore ='$user_check'" ,mysqli_real_escape_string($connection,$codsensore);
+$ses_sql =  mysqli_query($connection, $query1);
+$row = $ses_sql->fetch_array(MYSQLI_NUM);
 ?></tr></i></b>
 Marca:
-<?php echo $row['marca'];?> <br>
+<?php echo htmlspecialchars($row['marca']);?> <br>
 Tipo:
-<?php echo $row['tipo'];?><br><br>
+<?php echo htmlspecialchars($row['tipo']);?><br><br>
 <form action="#" method="post"> 
 <form action="#" method="post"> 
 <b>
 Cliente proprietario<br>  
-<input name="clienteproprietario" type="text" id="clienteproprietario" value="<?php echo $row['clienteproprietario'];?>"><br />
+<input name="clienteproprietario" type="text" id="clienteproprietario" value="<?php echo htmlspecialchars($row['clienteproprietario']);?>"><br />
 Codice cliente<br> 
-<input name="codloginext" type="text" id="codloginext" value="<?php echo $row['codloginext'];?>"><br />
+<input name="codloginext" type="text" id="codloginext" value="<?php echo htmlspecialchars($row['codloginext']);?>"><br />
 Impianto<br>
-<input name="impianto" type="text" id="impianto" value="<?php echo $row['impianto'];?>"><br />
+<input name="impianto" type="text" id="impianto" value="<?php echo htmlspecialchars($row['impianto']);?>"><br />
 <input name="modifica" type="submit" id="modifica" value="SALVA"> 
 </b>
 </form> 
-<?php 
-if(isset($_POST['modifica'])){ 
-    $ses_sql=mysql_query("UPDATE sensori SET clientepropietario='".$_POST['clienteproprietario']."', codloginext='".$_POST['codloginext']."', impianto='".$_POST['impianto']."' WHERE codsensore ='$user_check'" , $connection); 
-} 
-//.... , 
-?> 
+
 <div style="text-align:center;">
 <form name="indietro" action="selezionasensorecli.php" method="GET">
 <br>
@@ -59,4 +54,4 @@ if(isset($_POST['modifica'])){
 </body>
 </div>
 </body>
-</html>
+</html>
