@@ -55,9 +55,9 @@ $connection = new mysqli($host, $username, $password, $db);
 $db =mysqli_select_db("$db_name"); 
 session_start();
 $user_check = $_SESSION['cerca'];
-$query1=  sprintf("SELECT * FROM $tbl_name WHERE codsensore ='$user_check'",mysqli_real_escape_string($db,$username), mysqli_real_escape_string($db,$password));
+$query1=  sprintf("SELECT * FROM $tbl_name WHERE codsensore ='$user_check'",mysqli_real_escape_string($connection,$codsensore));
 $ses_sql = mysqli_query($connection, $query1); 
-$row = mysqli_fetch_assoc($ses_sql);
+$row = $ses_sql->fetch_array(MYSQLI_NUM);
 
 // giorno del mese
 $numero_giorno_mese = date("j");
