@@ -11,11 +11,11 @@ $numeroimpianto = $_POST['numeroimpianto'];
 $indirizzo = $_POST['indirizzo'];
 $clienteproprietario=$_POST['clienteproprietario'];
 $codcliente= $_POST['codloginext'];
-$query1 = sprintf("INSERT INTO 'impianti' (numeroimpianto,indirizzo,clienteproprietario,codloginext) VALUES ('$numeroimpianto','$indirizzo','$clienteproprietario','$codcliente')",
+$query1 = sprintf("INSERT INTO 'impianti' (numeroimpianto,indirizzo,clienteproprietario,codcliente) VALUES ('$numeroimpianto','$indirizzo','$clienteproprietario','$codcliente')",
                       mysqli_real_escape_string($connessione,$numeroimpianto),
                   mysqli_real_escape_string($connessione,$indirizzo),
                   mysqli_real_escape_string($connessione,$clienteproprietario),
-                  mysqli_real_escape_string($connessione,$codloginext)
+                  mysqli_real_escape_string($connessione,$codcliente)
 			);
 $ses_sql =  mysqli_query($connection, $query1);
 header("location:impiantocreato.php");
