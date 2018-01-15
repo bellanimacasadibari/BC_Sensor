@@ -18,28 +18,29 @@ $username="setlist"; // Mysql username
 $password=""; // Mysql password
 $db_name="my_setlist"; //Nome del Database
 $tbl_name="members"; // Nome della Tabella
-$connection = mysql_connect("$host", "$username", "$password")or die("cannot connect");
-$db =mysql_select_db("$db_name")or die("cannot select DB"); 
+$connection = new mysqli($host, $username, $password, $db);
+$db =mysql_select_db("$db_name"); 
 session_start();
 $user_check = $_SESSION['cerca'];
-$ses_sql = mysql_query ("SELECT * FROM $tbl_name WHERE username ='$user_check'" , $connection);
-$row = mysql_fetch_assoc($ses_sql);
+    $query1 = sprintf("SELECT * FROM $tbl_name WHERE username ='$user_check'" ,mysqli_real_escape_string($connection,$username);
+$ses_sql = mysqli_query($connection, $query1);
+$row =  $ses_sql->fetch_array(MYSQLI_NUM);
 
 ?></tr></i></b>
 <form action="#" method="post"> 
 <form action="#" method="post"> 
 <br>Cognome: 
-<?php echo $row['Cognome'];?><br />
+<?php echo  htmlspecialchars($row['Cognome']);?><br />
 Nome:  
-<?php echo $row['Nome'];?><br />
+<?php echo htmlspecialchars($row['Nome']);?><br />
 Indirizzo: 
-<?php echo $row['Indirizzo'];?><br />
+<?php echo htmlspecialchars($row['Indirizzo']);?><br />
 Telefono:
-<?php echo $row['NumeroTel'];?><br />
+<?php echo htmlspecialchars($row['NumeroTel']);?><br />
 Email:
-<?php echo $row['email'];?><br />
+<?php echo htmlspecialchars($row['email']);?><br />
 Codice Personale:
-<?php echo $row['codloginext'];?><br />
+<?php echo htmlspecialchars($row['codloginext']);?><br />
 <br>
 <input name="modifica" type="submit" id="modifica" value="ELIMINA"> 
 
@@ -64,4 +65,4 @@ if(isset($_POST['modifica'])){
 </div>
 </div>
 </body>
-</html>
+</html>
