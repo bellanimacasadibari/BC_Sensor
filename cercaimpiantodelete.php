@@ -1,9 +1,9 @@
  <?php
-$host="localhost"; // Hostname
-$username="setlist"; // Mysql username
-$password=""; // Mysql password
-$db_name="my_setlist"; //Nome del Database
-$tbl_name="impianti"; // Nome della Tabella
+$host='localhost'; // Hostname
+$username='setlist'; // Mysql username
+$password=''; // Mysql password
+$db_name='my_setlist'; //Nome del Database
+$tbl_name='impianti'; // Nome della Tabella
 // Procedimento per connettersi al Database
 $connection = new mysqli($host, $username, getPassword(), $db);
 $db =mysqli_select_db("$db_name"); 
