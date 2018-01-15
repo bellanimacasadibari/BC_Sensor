@@ -18,12 +18,13 @@ $username="setlist"; // Mysql username
 $password="bustopabte25"; // Mysql password
 $db_name="my_setlist"; //Nome del Database
 $tbl_name="sensori"; // Nome della Tabella
-$connection = mysql_pconnect("$host", "$username", "$password");
-$db =mysql_select_db("$db_name"); 
+$connection = new mysqli($host, $username, $password, $db);
+$db =mysqli_select_db("$db_name"); 
 session_start();
 $user_check = $_SESSION['cerca'];
-$ses_sql = mysql_query ("SELECT * FROM $tbl_name WHERE codsensore ='$user_check'" , $connection);
-$row = mysql_fetch_assoc($ses_sql);
+$query1 = sprintf("SELECT * FROM $tbl_name WHERE codsensore ='$user_check'" ,mysqli_real_escape_string($db,$username), mysqli_real_escape_string($db,$password));
+$ses_sql =  mysqli_query($connection, $query1);
+$row = mysqli_fetch_assoc($ses_sql);
 $cod =  htmlspecialchars($row['codsensore']);
 $marca =  htmlspecialchars($row['marca']);
 $tipo =  htmlspecialchars($row['tipo']);
@@ -50,12 +51,13 @@ $username="setlist"; // Mysql username
 $password=""; // Mysql password
 $db_name="my_setlist"; //Nome del Database
 $tbl_name="rilevazioni"; // Nome della Tabella
-$connection = mysql_pconnect("$host", "$username", "$password");
-$db =mysql_select_db("$db_name"); 
+$connection = new mysqli($host, $username, $password, $db);
+$db =mysqli_select_db("$db_name"); 
 session_start();
 $user_check = $_SESSION['cerca'];
-$ses_sql = mysql_query ("SELECT * FROM $tbl_name WHERE codsensore ='$user_check'" , $connection);
-$row = mysql_fetch_assoc($ses_sql);
+$query1=  sprintf("SELECT * FROM $tbl_name WHERE codsensore ='$user_check'",mysqli_real_escape_string($db,$username), mysqli_real_escape_string($db,$password));
+$ses_sql = mysqli_query($connection, $query1); 
+$row = mysqli_fetch_assoc($ses_sql);
 
 // giorno del mese
 $numero_giorno_mese = date("j");
@@ -129,32 +131,32 @@ INFO RILEVAZIONE
 <br>
 Codice Sensore:
 <?php
-echo $row['codsensore'];
+echo htmlspecialchars($row['codsensore']);
 ?>
 <br>
 Marca e Tipo:
 <?php
-echo $row['codrilevazione'];
+echo htmlspecialchars($row['codrilevazione']);
 ?>
 <br>
 Successo rilevazione:
 <?php
-echo $row['descrizione'];
+echo htmlspecialchars($row['descrizione']);
 ?>
 <br>
 Data rilevazione:
 <?php
-echo $numero_giorno_mese."/".$numero_mese."/".$anno;
+echo htmlspecialchars($numero_giorno_mese."/".$numero_mese."/".$anno);
 ?>
 <br>
 Ora rilevazione:
 <?php
-echo $ora;
+echo htmlspecialchars($ora);
 ?>
 <br>
 Stringa ricevuta:
 <?php
-echo $random;
+echo htmlspecialchars($random);
 ?>
 </form> 
 </form>
