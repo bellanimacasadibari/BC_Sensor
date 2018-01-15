@@ -27,7 +27,7 @@ $query1 = sprintf("INSERT INTO 'members' (username,password,Nome,Cognome,Indiriz
                   mysqli_real_escape_string($connessione,$NumeroTel),
                   mysqli_real_escape_string($connessione,$Codice),
                   mysqli_real_escape_string($connessione,$Tipo),
-                  mysqli_real_escape_string($connessione,$codloginext),
+                  mysqli_real_escape_string($connessione,$codloginext)
 			);
 $ses_sql =  mysqli_query($connection, $query1);
 
