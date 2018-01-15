@@ -18,29 +18,32 @@ $username="setlist"; // Mysql username
 $password=""; // Mysql password
 $db_name="my_setlist"; //Nome del Database
 $tbl_name="impianti"; // Nome della Tabella
-$connection = mysql_connect("$host", "$username", "$password")or die("cannot connect");
-$db =mysql_select_db("$db_name")or die("cannot select DB"); 
+$connection = new mysqli($host, $username, $password, $db);
+$db =mysql_select_db("$db_name"); 
 session_start();
-$user_check = $_SESSION['cerca'];
-$ses_sql = mysql_query ("SELECT * FROM $tbl_name WHERE numeroimpianto ='$user_check'" , $connection);
-$row = mysql_fetch_assoc($ses_sql);
+    $user_check = $_SESSION['cerca'];
+    
+$query1 = sprintf("SELECT * FROM $tbl_name WHERE  numeroimpianto ='$user_check'" ,mysqli_real_escape_string($connection,$numeroimpianto);
+$ses_sql =mysqli_query($connection, $query1);
+$row = $ses_sql->fetch_array(MYSQLI_NUM);
 
 ?></tr></i></b>
 <form action="#" method="post"> 
 <form action="#" method="post"> 
 <br>Numero Impianto: 
-<?php echo $row['numeroimpianto'];?><br />
+<?php echo htmlspecialchars($row['numeroimpianto']);?><br />
 Indirizzo:  
-<?php echo $row['indirizzo'];?><br />
+<?php echo htmlspecialchars($row['indirizzo']);?><br />
 Cliente Proprietario:
-<?php echo $row['clienteproprietario'];?><br />
+<?php echo htmlspecialchars($row['clienteproprietario']);?><br />
 <br>
 <input name="modifica" type="submit" id="modifica" value="ELIMINA"> 
 
 </form> 
 <?php 
 if(isset($_POST['modifica'])){ 
-    $ses_sql=mysql_query("DELETE FROM $tbl_name WHERE numeroimpianto ='$user_check'" , $connection); 
+    $query1 = sprintf("DELETE * FROM $tbl_name WHERE  numeroimpianto ='$user_check'" ,mysqli_real_escape_string($connection,$numeroimpianto);
+    $ses_sql =mysqli_query($connection, $query1); 
     
     header("location:impiantoeliminato.php");
 } 
@@ -58,4 +61,4 @@ if(isset($_POST['modifica'])){
 </div>
 </div>
 </body>
-</html>
+</html>
