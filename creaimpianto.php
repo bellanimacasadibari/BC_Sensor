@@ -5,9 +5,8 @@ $username='setlist'; // Mysql username
 $password=''; // Mysql password
 $db_name='my_setlist'; //Nome del Database
 $tbl_nam='impianti'; // Nome della Tabella
-$db = mysql_connect($localhost,$username,$password);
-mysql_select_db($db_name,$db);
-
+$connection = new mysqli($host, $username, $password, $db);
+$db =mysqli_select_db("$db_name"); 
 $numeroimpianto = $_POST['numeroimpianto'];
 $indirizzo = $_POST['indirizzo'];
 $clienteproprietario=$_POST['clienteproprietario'];
