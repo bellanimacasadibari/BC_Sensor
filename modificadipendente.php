@@ -18,39 +18,33 @@ $username="setlist"; // Mysql username
 $password=""; // Mysql password
 $db_name="my_setlist"; //Nome del Database
 $tbl_name="members"; // Nome della Tabella
-$connection = mysql_connect("$host", "$username", "$password")or die("cannot connect");
-$db =mysql_select_db("$db_name")or die("cannot select DB"); 
+$connection = new mysqli($host, $username, $password, $db);
+$db =mysql_select_db("$db_name"); 
 session_start();
 $user_check = $_SESSION['cerca'];
-$ses_sql = mysql_query ("SELECT * FROM $tbl_name WHERE username ='$user_check'" , $connection);
-$row = mysql_fetch_assoc($ses_sql);
-
+$ses_sql =  mysqli_query($connection, $query1);
+$row = $ses_sql->fetch_array(MYSQLI_NUM);
 ?></tr></i></b>
 <form action="#" method="post"> 
 <form action="#" method="post"> 
 <b>Password<br>  
-<input name="password" type="text" id="password" value="<?php echo $row['password'];?>"><br />
+<input name="password" type="text" id="password" value="<?php echo  htmlspecialchars($row['password']);?>"><br />
 Cognome<br>  
-<input name="Cognome" type="text" id="Cognome" value="<?php echo $row['Cognome'];?>"><br />
+<input name="Cognome" type="text" id="Cognome" value="<?php echo  htmlspecialchars($row['Cognome']);?>"><br />
 Nome<br>  
-<input name="Nome" type="text" id="Nome" value="<?php echo $row['Nome'];?>"><br />
+<input name="Nome" type="text" id="Nome" value="<?php echo  htmlspecialchars($row['Nome']);?>"><br />
 Indirizzo<br>  
-<input name="Indirizzo" type="text" id="Indirizzo" value="<?php echo $row['Indirizzo'];?>"><br />
+<input name="Indirizzo" type="text" id="Indirizzo" value="<?php echo  htmlspecialchars($row['Indirizzo']);?>"><br />
 Telefono<br> 
-<input name="NumeroTel" type="text" id="NumeroTel" value="<?php echo $row['NumeroTel'];?>"><br />
+<input name="NumeroTel" type="text" id="NumeroTel" value="<?php echo  htmlspecialchars($row['NumeroTel']);?>"><br />
 Email<br>
-<input name="email" type="text" id="email" value="<?php echo $row['email'];?>"><br />
+<input name="email" type="text" id="email" value="<?php echo  htmlspecialchars($row['email']);?>"><br />
 Codice personale<br>
-<input name="codloginext" type="text" id="codloginext" value="<?php echo $row['codloginext'];?>"><br />
+<input name="codloginext" type="text" id="codloginext" value="<?php echo  htmlspecialchars($row['codloginext']);?>"><br />
 <input name="modifica" type="submit" id="modifica" value="SALVA"> 
 </b>
 </form> 
-<?php 
-if(isset($_POST['modifica'])){ 
-    $ses_sql=mysql_query("UPDATE members SET password='".$_POST['password']."', Cognome='".$_POST['Cognome']."', Nome='".$_POST['Nome']."', Indirizzo='".$_POST['Indirizzo']."', NumeroTel='".$_POST['NumeroTel']."', email='".$_POST['email']."', codloginext='".$_POST['codloginext']."' WHERE username ='$user_check'" , $connection); 
-} 
-//.... , 
-?> 
+
 <div style="text-align:center;">
 <form name="indietro" action="selezionauserdip.php" method="GET">
 <br>
@@ -62,4 +56,4 @@ if(isset($_POST['modifica'])){
 </body>
 </div>
 </body>
-</html>
+</html>
