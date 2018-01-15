@@ -5,11 +5,12 @@ $password=""; // Mysql password
 $db_name="my_setlist"; //Nome del Database
 $tbl_name="members"; // Nome della Tabella
 // Procedimento per connettersi al Database
-mysql_pconnect("$host", "$username", "$password");
-mysql_select_db("$db_name"); 
+$connection = new mysqli($host, $username, $password, $db);
+$db =mysql_select_db("$db_name");
 // Nome utente e password inviate attraverso il form
 $myusername=$_POST['myusername'];
-$sql="SELECT * FROM $tbl_name WHERE username='$myusername' and tipo='Cliente'";
+$query1 = sprintf("SELECT * FROM $tbl_name WHERE username='$myusername' and tipo='Cliente'" ,mysqli_real_escape_string($connection,$username);
+$sql= mysqli_query($connection, $query1);
 $result=mysql_query($sql);
 // Mysql_num_row is counting table row
 $count=mysql_num_rows($result);
