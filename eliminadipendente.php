@@ -18,8 +18,8 @@ $username="setlist"; // Mysql username
 $password=""; // Mysql password
 $db_name="my_setlist"; //Nome del Database
 $tbl_name="members"; // Nome della Tabella
-$connection = mysqli_connect("$host", "$username", "$password")or die("cannot connect");
-$db =mysqli_select_db("$db_name")or die("cannot select DB"); 
+$connection = new mysqli($host, $username, $password, $db);
+$db =mysqli_select_db("$db_name");
 session_start();
 $user_check = $_SESSION['cerca'];
     $query1 = sprintf("SELECT * FROM $tbl_name WHERE username='$user_check'" ,mysqli_real_escape_string($connection,$username);
