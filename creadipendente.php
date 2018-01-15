@@ -5,9 +5,8 @@ $username="setlist"; // Mysql username
 $password=""; // Mysql password
 $db_name="my_setlist"; //Nome del Database
 $tbl_name="members"; // Nome della Tabella
-$db = mysql_connect($localhost,$username,$password);
-mysql_select_db($db_name,$db);
-
+$connection = new mysqli($host, $username, $password, $db);
+$db =mysqli_select_db("$db_name"); 
 $username = $_POST['username'];
 $password = $_POST['password'];
 $Nome = $_POST['Nome'];
