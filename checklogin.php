@@ -1,17 +1,18 @@
  <?php
-$host="localhost"; // Hostname
-$username="setlist"; // Mysql username
-$password=""; // Mysql password
-$db_name="my_setlist"; //Nome del Database
-$tbl_name="members"; // Nome della Tabella
+$host='localhost'; // Hostname
+$username='setlist'; // Mysql username
+$password=''; // Mysql password
+$db_name='my_setlist'; //Nome del Database
+$tbl_name='members'; // Nome della Tabella
 // Procedimento per connettersi al Database
-mysql_connect("$host", "$username", "$password")or die("cannot connect");
-mysql_select_db("$db_name")or die("cannot select DB"); 
+$connection = new mysqli($host, $username, $password, $db);
+$db =mysqli_select_db('$db_name'); 
 // Nome utente e password inviate attraverso il form
 $myusername=$_POST['myusername'];
 $mypassword=$_POST['mypassword'];
 $mytipo=$_POST['mytipo'];
-$sql="SELECT * FROM $tbl_name WHERE username='$myusername' and password='$mypassword' and tipo='$mytipo'";
+$query1 = sprintf("SELECT * FROM $tbl_name WHERE  username='$myusername' and password='$mypassword' and tipo='$mytipo'" ,mysqli_real_escape_string($connection,$username),mysqli_real_escape_string($connection,$password), mysqli_real_escape_string($connection,$tipo));
+$ses_sql =  mysqli_query($connection, $query1);
 $result=mysql_query($sql);
 // Mysql_num_row is counting table row
 $count=mysql_num_rows($result);
@@ -25,21 +26,21 @@ if($count==1){
 
 if(isset($_POST['mytipo'])){
  $mytipo=$_POST['mytipo'];
- if($mytipo == "Amministratore") {
+ if($mytipo == 'Amministratore') {
  session_start();
  $_SESSION['login'] = $myusername;
- header("location:amministratorehome.php");
+ header('location:amministratorehome.php');
 }
- else if($mytipo == "Dipendente") {
+ else if($mytipo == 'Dipendente') {
  session_start();
  $_SESSION['login'] = $myusername;
-header("location:dipendentehome.php");
+header('location:dipendentehome.php');
 }
-elseif ($mytipo == "Cliente"){
+elseif ($mytipo == 'Cliente'){
 session_start();
  $_SESSION['login'] = $myusername;
-header("location:clientehome.php");}}}
+header('location:clientehome.php');}}}
 else {
-echo "Attenzione username o password errati";
+echo 'Attenzione username o password errati';
 }
-?> 
+?> 
