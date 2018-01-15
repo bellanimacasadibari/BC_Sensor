@@ -24,18 +24,22 @@ session_start();
 $user_check = $_SESSION['cerca'];
 $ses_sql = mysql_query ("SELECT * FROM $tbl_name WHERE codsensore ='$user_check'" , $connection);
 $row = mysql_fetch_assoc($ses_sql);
-
+$cod = $row['codsensore'];
+$marca = $row['marca'];
+$tipo = $row['tipo'];
+$cliente =$row['clienteproprietario'];
 ?></tr></i></b>
 <form action="#" method="post"> 
 <form action="#" method="post"> 
 <br>Codice Sensore: 
-<?php echo $row['codsensore'];?><br />
+<?php 
+    echo $cod;?><br />
 Marca:  
-<?php echo $row['marca'];?><br />
+<?php echo $marca;?><br />
 Tipo:
-<?php echo $row['tipo'];?><br />
+<?php echo $tipo;?><br />
 Cliente Proprietario:
-<?php echo $row['clienteproprietario'];?><br />
+<?php echo $cliente ;?><br />
 <br>
 
 
