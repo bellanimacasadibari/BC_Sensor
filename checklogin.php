@@ -11,7 +11,7 @@ $db =mysqli_select_db('$db_name');
 $myusername=$_POST['myusername'];
 $mypassword=$_POST['mypassword'];
 $mytipo=$_POST['mytipo'];
-$query1 = sprintf("SELECT * FROM $tbl_name WHERE  username='$myusername' and password='$mypassword' and tipo='$mytipo'" ,mysqli_real_escape_string($connection,$username),mysqli_real_escape_string($connection,$password), mysqli_real_escape_string($connection,$tipo));
+$query1 = sprintf("SELECT * FROM 'members' WHERE  username='$myusername' and password='$mypassword' and tipo='$mytipo'" ,mysqli_real_escape_string($connection,$username),mysqli_real_escape_string($connection,$password), mysqli_real_escape_string($connection,$tipo));
 $result =  mysqli_query($connection, $query1);
 
 // Mysql_num_row is counting table row
