@@ -16,12 +16,12 @@ $username="setlist"; // Mysql username
 $password=""; // Mysql password
 $db_name="my_setlist"; //Nome del Database
 $tbl_name="members"; // Nome della Tabella
-$connection = mysql_connect("$host", "$username", "$password")or die("cannot connect");
-$db =mysql_select_db("$db_name")or die("cannot select DB"); 
+$ses_sql =  mysqli_query($connection, $query1);
 session_start();
 $user_check = $_SESSION['login'];
-$ses_sql = mysql_query ("SELECT * FROM $tbl_name WHERE username ='$user_check'" , $connection);
-$row = mysql_fetch_assoc($ses_sql);
+ $query1 = sprintf("SELECT * FROM $tbl_name WHERE username ='$user_check'" ,mysqli_real_escape_string($connection,$username);
+$ses_sql =  mysqli_query($connection, $query1);
+$row = $ses_sql->fetch_array(MYSQLI_NUM);
  $str = <<<HTML "Username: ". $row['username']. "<br>";
  "Cognome: ". $row['Cognome']. "<br>";
  "Nome: ". $row['Nome']. "<br>";
