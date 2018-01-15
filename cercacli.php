@@ -5,7 +5,7 @@ $password=""; // Mysql password
 $db_name="my_setlist"; //Nome del Database
 $tbl_name="members"; // Nome della Tabella
 // Procedimento per connettersi al Database
-mysqli_connect("$host", "$username", "$password");
+mysqli_connect("$host", "$username", getPassword());
 mysqli_select_db("$db_name"); 
 // Nome utente e password inviate attraverso il form
 $myusername=$_POST['myusername'];
