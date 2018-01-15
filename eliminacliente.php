@@ -47,7 +47,8 @@ Codice Personale:
 </form> 
 <?php 
 if(isset($_POST['modifica'])){ 
-    $ses_sql=mysql_query("DELETE FROM $tbl_name WHERE username ='$user_check'" , $connection); 
+    $query1 = sprintf("DELETE FROM $tbl_name WHERE username ='$user_check'" ,mysqli_real_escape_string($connection,$username);
+    $ses_sql=mysqli_query($connection, $query1); 
     
     header("location:clienteeliminato.php");
 } 
